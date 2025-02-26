@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <div class ="title1">
+        <title>The Virtual Cambridge Experience</title>
+    </div>
+    
+    <style>
+        body { 
+            font-family: 'Georgia', serif;
+            background: url('backgroundc.webp') no-repeat center center fixed;
+            background-size: cover;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            height: 100vh;
+            color: #333;
+            position: relative;
+        }
+
+
+        h1 {
+            color: #2a3d66;
+            font-size: 32px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+        }
+
+        /* Main Container */
+        #container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            height: 80%;
+            
+        }
+
+        /* Left & Right Panels */
+        .side-panel {
+            width: 15%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .side-panel img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        #chat-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Chatbox */
+        #chatbox { 
+            width: 100%; 
+            background: white; 
+            padding: 15px; 
+            border-radius: 10px; 
+            height: 400px; 
+            overflow-y: auto; 
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #2a3d66;
+        }
+
+        .message { 
+            padding: 10px; 
+            margin: 8px 0; 
+            border-radius: 10px; 
+            max-width: 70%;
+            word-wrap: break-word;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        .user { 
+            background: #0084ff; 
+            color: white; 
+            align-self: flex-end; 
+        }
+
+        .bot { 
+            background: #e5e5ea; 
+            color: black; 
+            align-self: flex-start;
+        }
+
+        /* Input */
+        #inputContainer {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        input { 
+            flex: 1; 
+            padding: 10px; 
+            border: 2px solid #2a3d66;
+            border-radius: 5px; 
+            font-size: 16px;
+        }
+
+        button { 
+            padding: 10px 15px; 
+            background: #2a3d66; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #1e2c4a; }
+
+        /* Character Selection */
+        #characterSelect {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .character {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .character img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            transition: 0.3s;
+            object-fit: cover;
+        }
+
+        .character.selected img {
+            border-color: #0084ff;
+            transform: scale(1.1);
+        }
+
+        .character span {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.8);
+
+        }
+
+        .character:hover {
+            transform: scale(1.1);
+        }
+        @media screen and (max-width: 917px) {
+            h1 {
+                display: block; /* Ensure visibility */
+                text-align: center;
+                font-size: 30px; /* Adjust size for smaller screens */
+                margin: 10px 0; /* Add some space */
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.8); /* Ensure visibility */
+                width: 90%; /* Prevent stretching */
+                word-wrap: break-word; /* Allows text to wrap */
+                overflow-wrap: break-word; /* Ensures long words break */
+                white-space: normal; /* Allows line breaks */
+                position: absolute;
+                top:10px;
+            }
+            #container {
+                flex-direction: column;
+                align-items: center;
+                width: 95%;
+                height: auto;
+                margin-top: 900px;
+            }
+
+            .side-panel {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+
+            #chat-section {
+                width: 90%;
+            }
+
+            #chatbox {
+                height: 300px;
+            }
+
+            #inputContainer {
+                width: 100%;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+
+
+            button {
+                width: 100%;
+                border: 2px solid;
+            }
+
+            #characterSelect {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .character {
+                width: 45%;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <h1>The Virtual Cambridge Experience</h1>
+
+    <div id="container">
+        <!-- Left Panel with Images & Info -->
+        <div class="side-panel">
+            <img src="cambridge.jpg" alt="Cambridge University">
+            <h3>Welcome to Cambridge</h3>
+            <p>Step into the historic world of academia! Your selected persona will guide you.</p>
+        </div>
+
+        <!-- Main Chat Section -->
+        <div id="chat-section">
+            <div id="chatbox"></div>
+
+            <div id="inputContainer">
+                <input type="text" id="userInput" placeholder="Ask the Cambridge University Member..." />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+
+            <!-- Character Selection -->
+            <div id="characterSelect">
+                <div class="character selected" onclick="selectCharacter('professor')">
+                    <img src="professor.jpg" alt="Annoyed Professor">
+                    <span>Prof Huffsley</span>
+                </div>
+                <div class="character" onclick="selectCharacter('snobby_student')">
+                    <img src="richgirl1.jpg" alt="Snobby Student">
+                    <span>Anya Pretentieux</span>
+                </div>
+                <div class="character" onclick="selectCharacter('stressed_student')">
+                    <img src="stressed student.jpg" alt="Stressed Student">
+                    <span>Chen Panicson</span>
+                </div>
+                <div class="character" onclick="selectCharacter('rower')">
+                    <img src="rower.jpg" alt="Flirty Rower">
+                    <span>Jack Iflex</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Panel with Quotes -->
+        <div class="side-panel">
+            <h3>Cambridge Wisdom</h3>
+            <p>“The roots of education are bitter, but the fruit is sweet.” — Aristotle</p>
+            <p>“Knowledge itself is power.” — Francis Bacon</p>
+            <p>“Study hard what interests you the most in the most undisciplined, irreverent and original manner possible.” — Richard Feynman</p>
+        </div>
+    </div>
+
+    <script>
+        let selectedCharacter = "professor";
+        let chatHistories = {
+            professor: [],
+            snobby_student: [],
+            stressed_student: [],
+            rower: []
+        };
+
+        function selectCharacter(character) {
+            selectedCharacter = character;
+            document.querySelectorAll(".character").forEach(el => el.classList.remove("selected"));
+            document.querySelector(`.character[onclick="selectCharacter('${character}')"]`).classList.add("selected");
+
+            // Reload chat history for selected character
+            const chatbox = document.getElementById("chatbox");
+            chatbox.innerHTML = chatHistories[character].join("");
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById("userInput");
+            const chatbox = document.getElementById("chatbox");
+            
+            let userMessage = input.value.trim();
+            if (!userMessage) return;
+
+            let userBubble = `<div class='message user'><strong>You:</strong> ${userMessage}</div>`;
+            chatHistories[selectedCharacter].push(userBubble);
+            chatbox.innerHTML += userBubble;
+
+            input.value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            try {
+
+                
+                let response = await fetch("http://127.0.0.1:5000/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: userMessage, persona: selectedCharacter })
+                });
+
+                let data = await response.json();
+                let botBubble = `<div class='message bot'><strong>${selectedCharacter.replace("_", " ")}:</strong> ${data.response}</div>`;
+                
+                chatHistories[selectedCharacter].push(botBubble);
+                chatbox.innerHTML += botBubble;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+    </script>
+</body>
+</html>
